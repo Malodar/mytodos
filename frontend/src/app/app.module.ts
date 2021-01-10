@@ -17,7 +17,6 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { TodoModule } from 'app/main/todo/todo.module';
 import { AuthModule } from './main/auth/auth.module';
 import { TodosModule } from './main/todos/todos.module';
 
@@ -56,7 +55,6 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        TodoModule,
         AuthModule,
         TodosModule,
     ],

@@ -8,14 +8,15 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { Todo } from 'app/main/todos/todos.model';
-import { TodoService } from 'app/main/todo/todo.service';
+import { TodoService } from 'app/main/todos/todos.service';
 
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations   : fuseAnimations
+  animations   : fuseAnimations,
+  providers: [TodoService]
 })
 export class TodosComponent implements OnInit {
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodosComponent } from './todos.component';
 import { RouterModule } from '@angular/router';
-import { TodoService } from '../todo/todo.service';
+import { TodoService } from './todos.service';
 import { FuseSidebarModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';

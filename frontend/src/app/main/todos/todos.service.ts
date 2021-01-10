@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { FuseUtils } from '@fuse/utils';
 
-import { Todo } from 'app/main/todo/todo.model';
+import { Todo } from 'app/main/todos/todos.model';
 
 @Injectable()
 export class TodoService implements Resolve<any>

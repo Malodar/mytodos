@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { fuseAnimations } from '@fuse/animations';
 
-import { TodoService } from 'app/main/todo/todo.service';
+import { TodoService } from 'app/main/todos/todos.service';
 
 @Component({
     selector     : 'todo-main-sidebar',
@@ -88,7 +88,7 @@ export class TodoMainSidebarComponent implements OnInit, OnDestroy
      */
     newTodo(): void
     {
-        this._router.navigate(['/apps/todo/all']).then(() => {
+        this._router.navigate(['/todo/all']).then(() => {
             setTimeout(() => {
                 this._todoService.onNewTodoClicked.next('');
             });

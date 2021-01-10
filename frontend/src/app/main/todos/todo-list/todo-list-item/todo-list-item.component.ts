@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, OnDestroy, OnInit, ViewEncapsulation } f
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Todo } from 'app/main/todos/todos.model';
-import { TodoService } from 'app/main/todo/todo.service';
+import { TodoService } from 'app/main/todos/todos.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({

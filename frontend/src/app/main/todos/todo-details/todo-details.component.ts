@@ -7,7 +7,7 @@ import { FuseUtils } from '@fuse/utils';
 import { fuseAnimations } from '@fuse/animations';
 
 import { Todo } from 'app/main/todos/todos.model';
-import { TodoService } from 'app/main/todo/todo.service';
+import { TodoService } from 'app/main/todos/todos.service';
 
 @Component({
     selector     : 'todo-details',
