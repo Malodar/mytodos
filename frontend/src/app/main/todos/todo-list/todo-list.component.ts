@@ -72,15 +72,15 @@ export class TodoListComponent implements OnInit, OnDestroy
 
                     if ( tagHandle )
                     {
-                        this._location.go('apps/todo/tag/' + tagHandle);
+                        this._location.go('todo/tag/' + tagHandle);
                     }
                     else if ( filterHandle )
                     {
-                        this._location.go('apps/todo/filter/' + filterHandle);
+                        this._location.go('todo/filter/' + filterHandle);
                     }
                     else
                     {
-                        this._location.go('apps/todo/all');
+                        this._location.go('todo/all');
                     }
                 }
                 else

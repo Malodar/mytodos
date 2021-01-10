@@ -6,28 +6,14 @@ export const navigation: FuseNavigation[] = [
         title    : 'Applications',
         translate: 'NAV.APPLICATIONS',
         type     : 'group',
-        children : [
-            {
-                id       : 'todo',
-                title    : 'Todo',
-                translate: 'NAV.SAMPLE.TITLE',
-                type     : 'item',
-                icon     : 'email',
-                url      : '/todo',
-                badge    : {
-                    title    : '25',
-                    translate: 'NAV.SAMPLE.BADGE',
-                    bg       : '#F44336',
-                    fg       : '#FFFFFF'
-                }
-            },
+        children : [            
             {
                 id       : 'todos',
                 title    : 'Todos',
                 translate: 'TODOS',
                 type     : 'item',
                 icon     : 'email',
-                url      : '/todos',
+                url      : '/todo',
                 badge    : {
                     title    : 'Todos',
                     translate: 'NAV.SAMPLE.BADGE',

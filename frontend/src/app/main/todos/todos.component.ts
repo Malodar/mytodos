@@ -16,7 +16,6 @@ import { TodoService } from 'app/main/todos/todos.service';
   styleUrls: ['./todos.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations   : fuseAnimations,
-  providers: [TodoService]
 })
 export class TodosComponent implements OnInit {
 

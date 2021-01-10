@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodosComponent } from './todos.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { TodoService } from './todos.service';
 import { FuseSidebarModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -19,9 +19,9 @@ import { TodoListItemComponent } from './todo-list/todo-list-item/todo-list-item
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoDetailsComponent } from './todo-details/todo-details.component';
 
-const routes = [
+const routes: Routes = [
   {
-    path: 'todos',
+    path: 'todo',
     component: TodosComponent
   },
   {
@@ -70,7 +70,7 @@ const routes = [
   //     path      : '**',
   //     redirectTo: 'all'
   // }
-  ];
+];
 
 @NgModule({
   declarations: [
@@ -101,6 +101,9 @@ const routes = [
   ],
   exports: [
     TodosComponent
-  ]
+  ],
+  providers   : [
+    TodoService
+]
 })
 export class TodosModule { }

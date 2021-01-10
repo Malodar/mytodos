@@ -88,7 +88,7 @@ export class TodoMainSidebarComponent implements OnInit, OnDestroy
      */
     newTodo(): void
     {
-        this._router.navigate(['/todo/all']).then(() => {
+        this._router.navigate(['all']).then(() => {
             setTimeout(() => {
                 this._todoService.onNewTodoClicked.next('');
             });
