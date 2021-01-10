@@ -1,0 +1,21 @@
+---
+- name: service runner
+  hosts: 127.0.0.1
+  become: true
+  vars:
+    project_path:  "{{ ansible_facts.env['PWD'] }}/.."
+  tasks:  
+
+    # - name: Enable Websocket service
+    #   service:
+    #     name: websock
+    #     enabled: yes
+
+    - name: reload daemons
+      shell: systemctl daemon-reload
+
+    - name: Run Postgres service
+      service:
+        name: postgresql
+        state: started
+

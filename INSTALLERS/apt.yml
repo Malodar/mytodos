@@ -1,0 +1,147 @@
+---
+- name: apt installer
+  hosts: 127.0.0.1
+  become: true
+  vars:
+    project_path:  "{{ ansible_facts.env['PWD'] }}/.."
+    nodejs_major_version: 14
+  tasks:   
+  
+    - name: sshfs 
+      apt:
+        name: sshfs 
+        update_cache: yes     
+
+    - name: vim 
+      apt:
+        name: vim 
+        update_cache: yes
+    
+    - name: rsync 
+      apt:
+        name: rsync 
+        update_cache: yes
+
+    - name: screen 
+      apt:
+        name: screen 
+        update_cache: yes
+
+    - name: ripgrep
+      apt:
+        name: ripgrep
+        update_cache: yes
+
+    - name: libxml2-dev
+      apt:
+        name: libxml2-dev
+        update_cache: yes
+  
+    - name: build-essential
+      apt:
+        name: build-essential
+        update_cache: yes
+    
+    - name: tcl 
+      apt:
+        name: tcl 
+        update_cache: yes
+
+    - name: libxslt1-dev
+      apt:
+        name: libxslt1-dev
+        update_cache: yes
+
+    - name: virtualenv
+      apt:
+        name: virtualenv
+        update_cache: yes
+  
+    - name: libpq-dev 
+      apt:
+        name: libpq-dev 
+        update_cache: yes
+
+    - name: python3-dev
+      apt:
+        name: python3-dev
+        update_cache: yes
+
+    - name: Nginx        
+      apt:
+        name: nginx
+        update_cache: yes
+  
+    - name: htop 
+      apt:
+        name: htop
+        update_cache: yes
+
+    - name: wget 
+      apt:
+        name: wget
+        update_cache: yes
+
+    - name: postgresql-contrib
+      apt:
+        name: postgresql-contrib
+        update_cache: yes
+
+    - name: redis-server
+      apt:
+        name: redis-server
+        update_cache: yes
+
+    - name: curl
+      apt:
+        name: curl
+        update_cache: yes
+    
+    - name: libnm-dev
+      apt:
+        name: libnm-dev
+        update_cache: yes
+
+    - name: Get python version
+      shell: ls /usr/bin/python3*|grep -v config|tr ' ' '\n'|sort|uniq|grep -v m$|grep -v json|tail -n 1|rev |cut -d '/' -f1 |rev|tr -d ' '
+      register: python_installed
+
+    - name: libdev
+      apt:
+        name: "lib{{python_installed.stdout}}-dev"
+        update_cache: yes
+    
+    - name: Install aps from requirements.txt using Python 3.*
+      pip:
+        requirements: "{{project_path}}/backend/requirements.txt"
+        virtualenv: "{{project_path}}/../venv"
+        virtualenv_python: "{{python_installed.stdout}}"
+      become: yes
+      become_user: user
+
+    - name: Download NodeJS archive
+      shell: curl -sL https://deb.nodesource.com/setup_{{nodejs_major_version}}.x | bash -
+    
+    - name: Install NodeJS
+      apt:
+        name: nodejs 
+        update_cache: yes  
+
+    - name: Install latest NPM globally.
+      community.general.npm:
+        name: npm@latest
+        global: yes
+
+    - name: Install yarn globally.
+      community.general.npm:
+        name: yarn
+        global: yes
+
+    - name: Install Angular CLI globally.
+      community.general.npm:
+        name: '@angular/cli'
+        global: yes
+
+    - name: Install packages based on package.json.
+      community.general.npm:
+        path: "{{project_path}}/frontend/"

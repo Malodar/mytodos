@@ -1,0 +1,70 @@
+---
+- name: file copy, move, downloading, etc.
+  hosts: 127.0.0.1
+  become_user: postgres
+  vars:
+    project_path:  "{{ ansible_facts.env['PWD'] }}/.."
+    db_owner: admin
+    db_password: powerpower
+    db_name: todos_db
+    db_schema: todos    
+  tasks: 
+
+    - name: Grant users postgres trust method of authentication.
+      vars:  
+        ansible_python_interpreter: "{{project_path}}/../venv/bin/python3"
+      community.general.postgresql_pg_hba:
+        dest: /etc/postgresql/13/main/pg_hba.conf
+        contype: local
+        users: postgres
+        method: trust
+      become: true
+    
+    - name: Restart Postgresql service
+      shell: systemctl restart postgresql
+
+    - name: Create a new database "{{db_name}}"
+      vars:  
+        ansible_python_interpreter: "{{project_path}}/../venv/bin/python3"
+      community.general.postgresql_db:
+        name: "{{db_name}}"
+
+    - name: Create DB user
+      vars:  
+        ansible_python_interpreter: "{{project_path}}/../venv/bin/python3"
+      community.general.postgresql_user:
+        db: "{{db_name}}"
+        name: "{{db_owner}}"
+        password: "{{db_password}}"
+
+    - name: Create a new schema "{{db_schema}}" with a user "{{db_owner}}" who will own it
+      vars:  
+        ansible_python_interpreter: "{{project_path}}/../venv/bin/python3"
+      community.general.postgresql_schema:
+        db: "{{db_name}}"
+        name: "{{db_schema}}"
+        owner: "{{db_owner}}"
+
+    # - name: Make Django migrations
+    #   vars:  
+    #     ansible_python_interpreter: "{{project_path}}/../venv/bin/python3"
+    #   community.general.django_manage:
+    #     command: migrate
+    #     app_path: "{{ project_path }}"
+    #     virtualenv: "{{project_path}}/../venv"
+    #   tags: migrate
+
+    # - name: Run Django service
+    #   service:
+    #     name: django
+    #     enabled: yes
+    #     state: restarted
+
+    # - name: Enable Websocket service
+    #   service:
+    #     name: websock
+    #     state: started
+
+  handlers:
+    - name: restart postgresql
+      service: name=postgresql state=restarted
